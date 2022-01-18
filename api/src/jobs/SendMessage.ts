@@ -1,3 +1,4 @@
+import { AppError } from '@errors/AppError';
 import { TelegramClient } from 'telegram'
 import { StringSession } from 'telegram/sessions';
 
@@ -10,6 +11,10 @@ export default {
     });
 
     await client.connect();
+
+    if (!await client.checkAuthorization()) {
+      throw new AppError('User is not logged in!')
+    }
 
     await client.sendMessage(user, { message: message })
   },

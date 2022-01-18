@@ -1,13 +1,12 @@
-import express, { NextFunction, Request, Response } from "express";
+import { AppError } from "@errors/AppError";
 import cors from 'cors';
 import "dotenv/config";
-import { router } from './routes'
-import { AppError } from "@errors/AppError";
+import express, { NextFunction, Request, Response } from "express";
 import http from 'http';
 import { Server } from "socket.io";
-import Queue from "lib/Queue";
+import { router } from './routes';
+import './queue';
 
-Queue.process();
 const app = express();
 
 app.use(express.json());
@@ -28,13 +27,6 @@ app.use(
   }
 );
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-  }
+app.listen(3333, () => {
+  console.log('Server started')
 });
-
-server.listen(3333);
-
-export { io }
