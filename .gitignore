@@ -1,0 +1,7 @@
+/*/.env
+/*/node_modules
+/*/coverage
+/*/!tmp/.gitkeep
+/*/dist
+/*/build
+/*/package-lock.json
