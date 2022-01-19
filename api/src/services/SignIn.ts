@@ -3,9 +3,7 @@ import { Api } from 'telegram';
 import { client, session } from './SendCode';
 
 export async function SignIn(phoneNumber: string, phoneCodeHash: string, phoneCode: string) {
-  if (!phoneNumber || phoneNumber === '') throw new AppError('Usuário não está logado!');
-
-  if (!phoneCode || phoneCode === '') throw new AppError('Destinatário não foi informado!');
+  if (!phoneCode || phoneCode === '') throw new AppError('Código não foi infomrmado!');
 
   // client.session.setDC(2, '149.154.167.40', 80)
 
@@ -18,8 +16,7 @@ export async function SignIn(phoneNumber: string, phoneCodeHash: string, phoneCo
       phoneCode: phoneCode,
     })
   ).catch((err) => {
-    console.log(err)
-    throw new AppError('kkkk')
+    throw new AppError(err)
   })
 
   return session.save();

@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label-input {
+  margin-top: 12px;
+}
+
+input, button {
+  padding: 12px;
+  outline: none;
+}
+
+input, button {
+  margin-top: 12px;
+}
+
+button {
+  cursor: pointer;
+  width: 100%;
+  background: #4287ff;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+
+input {
+  width: 100%;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Chat } from './views/Chat';
 import { Login } from './views/Login';
+import './global.css'
 
 function App() {
   return (

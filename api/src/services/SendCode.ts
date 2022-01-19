@@ -8,7 +8,7 @@ export const client = new TelegramClient(session, parseInt(process.env.API_ID), 
 });
 
 export async function SendCode(phoneNumber: string) {
-  if (!phoneNumber || phoneNumber === '') throw new AppError('Usuário não está logado!');
+  if (!phoneNumber || phoneNumber === '') throw new AppError('Informe um número de telefone válido!');
 
   // client.session.setDC(2, '149.154.167.40', 80)
 

@@ -20,7 +20,7 @@ export async function SendMessage(session: string, user: string, message: string
   }
 
   await client.sendMessage(user, { message: message })
-  .catch(() => {
-    throw new AppError('Erro interno');
-  })
+    .catch((err) => {
+      throw new AppError(err);
+    })
 }
