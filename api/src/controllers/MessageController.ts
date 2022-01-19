@@ -1,19 +1,31 @@
-import { AppError } from "@errors/AppError";
+import { SendCode } from "@services/SendCode";
+import { SignIn } from "@services/SignIn";
 import { Request, Response } from "express";
-import Queue from "lib/Queue";
+import { SendMessage } from "../services/SendMessage";
 
 export class AuthController {
   async send(req: Request, res: Response): Promise<Response> {
-    const { session, user, message } = req.body;
+    const session = req.headers.session.toString();
+    const { user, message } = req.body;
 
-    if (!session) throw new AppError('User is not logged in!');
+    await SendMessage(session, user, message);
 
-    if (!user) throw new AppError('Receiver was not informed!');
+    return res.status(200).send();
+  }
 
-    if (!message || message === '') throw new AppError('Message content cannot be empty!');
+  async sendCode(req: Request, res: Response): Promise<Response> {
+    const { phoneNumber } = req.body;
 
-    await Queue.add('SendMessage', { session, user, message });
+    const phoneCodeHash = await SendCode(phoneNumber);
 
-    return res.status(200).send()
+    return res.status(200).json(phoneCodeHash);
+  }
+
+  async signIn(req: Request, res: Response): Promise<Response> {
+    const { phoneNumber, phoneCodeHash, phoneCode } = req.body;
+
+    const session = await SignIn(phoneNumber, phoneCodeHash, phoneCode);
+
+    return res.status(200).json(session);
   }
 }
